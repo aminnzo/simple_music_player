@@ -13,20 +13,47 @@ class HomePage extends GetView<HomePageController> {
           Positioned.fill(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.r),
-              child: Column(
-                children: [
-                  const HomeAppbar(),
-                  shuffleButton(() {}),
-                  SizedBox(height: 16.r),
-                  MusicListItem(),
-                  MusicListItem(),
-                  MusicListItem(),
-                  MusicListItem(),
-                ],
+              child: NestedScrollView(
+                headerSliverBuilder: (context, value) {
+                  return [
+                    const SliverToBoxAdapter(
+                      child: HomeAppbar(),
+                    ),
+                    SliverToBoxAdapter(
+                      child: shuffleButton(() {}),
+                    ),
+                  ];
+                },
+                body: controller.obx(
+                  (data) => ListView.builder(
+                    padding: EdgeInsets.only(bottom: 60.r),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: data!.length,
+                    itemBuilder: (context, index) => MusicListItem(
+                      image: data[index].image,
+                      musicName: data[index].musicName,
+                      artistName: data[index].artistName,
+                    ),
+                  ),
+                  onLoading: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Positioned(
+                        top: 64,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 1.r,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onError: (error) => Center(
+                    child: TextBase(error.toString()),
+                  ),
+                ),
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -34,7 +61,7 @@ class HomePage extends GetView<HomePageController> {
 
   Widget shuffleButton(VoidCallback onTap) {
     return Padding(
-      padding: EdgeInsets.all(24.r),
+      padding: EdgeInsets.fromLTRB(26.r, 24.r, 26.r, 40.r),
       child: Row(
         children: [
           GestureDetector(

@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:simple_music_player/app/index_app.dart';
 
 class MusicListItem extends StatelessWidget {
-  const MusicListItem({Key? key}) : super(key: key);
+  final String musicName;
+  final String artistName;
+  final String image;
+
+  const MusicListItem({
+    Key? key,
+    required this.musicName,
+    required this.artistName,
+    required this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +29,7 @@ class MusicListItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
                 child: ImageAsset(
-                  image: 'image1.png',
+                  image: image,
                   width: 64.r,
                   height: 64.r,
                 ),
@@ -31,12 +40,12 @@ class MusicListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextBase(
-                  'peaceful piano music',
+                  musicName,
                   fontWeight: FontWeight.bold,
                 ),
                 SizedBox(height: 3.r),
                 TextBase(
-                  'relaxing piano music',
+                  artistName,
                   fontWeight: FontWeight.w500,
                   fontSize: 13.sp,
                   color: Colors.white54,

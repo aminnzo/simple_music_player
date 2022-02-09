@@ -11,7 +11,8 @@ class ImageAsset extends StatelessWidget {
         required this.image,
       this.width = 24,
       this.height = 24,
-      this.fit})
+      this.fit = BoxFit.cover,
+      })
       : super(key: key);
 
   @override

@@ -26,7 +26,6 @@ class PlayerPage extends GetView<PlayerPageController> {
                         borderRadius: BorderRadius.circular(20.r),
                         child: const ImageAsset(
                           image: 'image1.png',
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ),

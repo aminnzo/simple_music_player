@@ -1,21 +1,23 @@
 import 'package:simple_music_player/app/index_app.dart';
 
-class HomePageController extends GetxController {
-  //TODO: Implement HomeController
+class HomePageController extends GetxController
+    with StateMixin<List<MusicItemModel>> {
+  final MusicProvider musicProvider;
 
-  final count = 0.obs;
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
-  //
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
+  HomePageController({required this.musicProvider});
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void onInit() {
+    fetchAllMusics();
+    super.onInit();
+  }
+
+  void fetchAllMusics() {
+    musicProvider.getMusics().then((result) {
+      List<MusicItemModel>? data = result;
+      change(data, status: RxStatus.success());
+    }, onError: (error) {
+      change(null, status: RxStatus.error(error.toString()));
+    });
+  }
 }
