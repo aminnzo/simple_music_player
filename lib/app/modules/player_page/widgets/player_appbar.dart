@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_music_player/app/index_app.dart';
 
-class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppbar({Key? key}) : super(key: key);
+class PlayerAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const PlayerAppbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +14,19 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Hero(
-                tag: 'appbar_text',
-                child: TextBase(
-                  'Music Player',
-                  fontSize: 26.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+              CircleAppbarIcon(
+                onTap: () => Get.back(),
+                icon: 'ic_back',
+                heroTag: 'appbar_back',
+                iconSize: 14.r,
               ),
               CircleAppbarIcon(
                 onTap: () {
                   debugPrint('TODO');
                 },
-                icon: 'ic_search',
+                icon: 'ic_more',
                 heroTag: 'appbar_icon',
-                iconSize: 20.r,
+                iconSize: 7.r,
               ),
             ],
           )),

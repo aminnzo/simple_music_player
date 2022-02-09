@@ -9,6 +9,6 @@ class ColorsBase {
   static const Color success = Color.fromRGBO(95, 143, 66, 1);
   static const Color error = Color.fromRGBO(171, 45, 74, 1);
 
-  static const Color gray = Color.fromRGBO(128, 128, 128, 1);
+  static const Color gray = Color.fromRGBO(196, 196, 196, 1);
 
 }

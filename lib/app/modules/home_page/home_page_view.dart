@@ -34,7 +34,7 @@ class HomePage extends GetView<HomePageController> {
 
   Widget shuffleButton(VoidCallback onTap) {
     return Padding(
-      padding: EdgeInsets.all(20.r),
+      padding: EdgeInsets.all(24.r),
       child: Row(
         children: [
           GestureDetector(
