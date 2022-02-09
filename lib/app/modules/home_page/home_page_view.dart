@@ -16,31 +16,40 @@ class HomePage extends GetView<HomePageController> {
               child: Column(
                 children: [
                   const HomeAppbar(),
-                  Padding(
-                    padding: EdgeInsets.all(20.r),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: VectorAsset(
-                            icon: 'ic_shuffle',
-                            size: 24.r,
-                          ),
-                        ),
-                        SizedBox(width: 10.r),
-                        TextBase(
-                          'Shuffle',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                        ),
-                      ],
-                    ),
-                  ),
+                  shuffleButton(() {}),
+                  SizedBox(height: 16.r),
+                  MusicListItem(),
+                  MusicListItem(),
+                  MusicListItem(),
+                  MusicListItem(),
                 ],
               ),
             ),
           ),
 
+        ],
+      ),
+    );
+  }
+
+  Widget shuffleButton(VoidCallback onTap) {
+    return Padding(
+      padding: EdgeInsets.all(20.r),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: onTap,
+            child: VectorAsset(
+              icon: 'ic_shuffle',
+              size: 24.r,
+            ),
+          ),
+          SizedBox(width: 10.r),
+          TextBase(
+            'Shuffle',
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+          ),
         ],
       ),
     );

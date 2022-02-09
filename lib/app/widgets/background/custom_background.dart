@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_music_player/app/index_app.dart';
+import 'package:simple_music_player/app/widgets/background/circle_blur_painter.dart';
 
 class CustomBackground extends StatelessWidget {
   const CustomBackground({Key? key}) : super(key: key);
