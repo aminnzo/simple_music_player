@@ -22,7 +22,7 @@ Widget TextBase(
         fontWeight: fontWeight,
         height: height,
         color: color,
-        fontFamily: Fonts.DMSans,
+        fontFamily: Fonts.Montserrat,
         decoration: decoration),
     textDirection: textDirection,
     textAlign: textAlign,

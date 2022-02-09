@@ -10,7 +10,7 @@ abstract class AppTheme {
 
   static ThemeData _theme(bool isDarkMode) {
     return ThemeData(
-      fontFamily: Fonts.DMSans,
+      fontFamily: Fonts.Montserrat,
       // appBarTheme: AppBarTheme(brightness: Brightness.dark),
       canvasColor: Colors.black,
       colorScheme: ColorScheme.fromSwatch().copyWith(
