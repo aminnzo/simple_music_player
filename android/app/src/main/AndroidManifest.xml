@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.dartdev.musicplayer.simple_music_player">
    <application
-        android:label="simple_music_player"
+        android:label="Music Player"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
