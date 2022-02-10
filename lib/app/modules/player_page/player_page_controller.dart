@@ -3,25 +3,38 @@ import 'package:just_audio/just_audio.dart';
 
 class PlayerPageController extends GetxController {
   final Map _argData = Get.arguments;
-
-  Rx<Duration> musicDuration = Rx<Duration>(Duration.zero);
+  late AudioPlayer player;
+  Rx<Duration> musicDuration = Rx<Duration>(const Duration(seconds: 1));
   Rx<Duration> currentDuration = Rx<Duration>(Duration.zero);
+  Rx<MusicItemModel> model = MusicItemModel().obs;
   RxBool isPlaying = RxBool(true);
 
-  late AudioPlayer player;
-  Rx<MusicItemModel> model = MusicItemModel().obs;
+  final homeController = Get.find<HomePageController>();
 
   @override
   void onInit() async {
-    model.value = _argData['model'];
-    player = _argData['player'];
-    musicDuration.value = Duration(seconds: model.value.duration);
-    playMusic();
+    try {
+      model.value = _argData['model'];
+      player = _argData['player'];
+      musicDuration.value = Duration(seconds: model.value.duration);
+      playMusic();
+    } on PlayerException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } on PlayerInterruptedException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
+    }
     super.onInit();
   }
 
   @override
   void onReady() {
+    _initPositionStream();
+    super.onReady();
+  }
+
+  void _initPositionStream() {
     int oldState = 0;
     player.positionStream.listen((duration) {
       if (oldState != duration.inSeconds) {
@@ -34,8 +47,9 @@ class PlayerPageController extends GetxController {
         isPlaying.value = false;
         oldState = 0;
       }
+    }, onError: (error) {
+      Get.log(error.toString(), isError: true);
     });
-    super.onReady();
   }
 
   void playMusic() async {
@@ -49,42 +63,59 @@ class PlayerPageController extends GetxController {
   }
 
   void seekDuration(int sec, {bool shouldPlay = true}) async {
-    await player.seek(Duration(seconds: sec));
-    if (shouldPlay) {
-      playMusic();
-    } else {
-      pauseMusic();
+    try {
+      await player.seek(Duration(seconds: sec));
+      if (shouldPlay) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
+    } on PlayerException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } on PlayerInterruptedException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
     }
   }
 
   void nextMusic() async {
-    final controller = Get.find<HomePageController>();
-    if(model.value.id != controller.musics.last.id) {
-      int nextIndex = controller.musics.indexOf(model.value) + 1;
-      model.value = controller.musics[nextIndex];
-      var _duration = await player.setAsset('assets/musics/${model.value.mp3}');
-      model.value.duration = _duration!.inSeconds;
-      musicDuration.value = _duration;
-      controller.currentPlayingMusic.value = model.value;
+    try {
+      if (model.value.id != homeController.musics.last.id) {
+        int nextIndex = homeController.musics.indexOf(model.value) + 1;
+        model.value = homeController.musics[nextIndex];
+        var _duration =
+            await player.setAsset('assets/musics/${model.value.mp3}');
+        model.value.duration = _duration!.inSeconds;
+        musicDuration.value = _duration;
+        homeController.currentPlayingMusic.value = model.value;
+      }
+    } on PlayerException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } on PlayerInterruptedException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
     }
   }
 
   void prevMusic() async {
-    final controller = Get.find<HomePageController>();
-    if(model.value.id != controller.musics.first.id) {
-      int prevIndex = controller.musics.indexOf(model.value) - 1;
-      model.value = controller.musics[prevIndex];
-      var _duration = await player.setAsset('assets/musics/${model.value.mp3}');
-      model.value.duration = _duration!.inSeconds;
-      musicDuration.value = _duration;
-      controller.currentPlayingMusic.value = model.value;
+    try {
+      if (model.value.id != homeController.musics.first.id) {
+        int prevIndex = homeController.musics.indexOf(model.value) - 1;
+        model.value = homeController.musics[prevIndex];
+        var _duration =
+            await player.setAsset('assets/musics/${model.value.mp3}');
+        model.value.duration = _duration!.inSeconds;
+        musicDuration.value = _duration;
+        homeController.currentPlayingMusic.value = model.value;
+      }
+    } on PlayerException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } on PlayerInterruptedException catch (e) {
+      Get.log(e.toString(), isError: true);
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
     }
   }
-
-  // void prevMusic() {
-  //   if(currentPlayingMusic.value.id != _musics.first.id) {
-  //     int nextIndex = _musics.indexOf(currentPlayingMusic.value) - 1;
-  //     handlePlayMusic(_musics[nextIndex]);
-  //   }
-  // }
 }

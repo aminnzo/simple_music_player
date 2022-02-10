@@ -27,7 +27,7 @@ class HomePage extends GetView<HomePageController> {
                     itemCount: data!.length,
                     itemBuilder: (context, index) => MusicListItem(
                       item: data[index],
-                      onTap: () => controller.handlePlayMusic(data[index]),
+                      onTap: () => controller.musicItemOnTap(data[index]),
                     ),
                   ),
                   onLoading: Stack(

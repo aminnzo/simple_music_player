@@ -26,11 +26,19 @@ class HomePageController extends GetxController
     });
   }
 
-  void handlePlayMusic(MusicItemModel model) async {
+  void musicItemOnTap(MusicItemModel model) async {
     if(currentPlayingMusic.value.id != model.id) {
-      var _duration = await player.setAsset('assets/musics/${model.mp3}');
-      model.duration = _duration!.inSeconds;
-      currentPlayingMusic.value = model;
+      try {
+        var _duration = await player.setAsset('assets/musics/${model.mp3}');
+        model.duration = _duration!.inSeconds;
+        currentPlayingMusic.value = model;
+      } on PlayerException catch (e) {
+        Get.log(e.toString(), isError: true);
+      } on PlayerInterruptedException catch (e) {
+        Get.log(e.toString(), isError: true);
+      } catch (e) {
+        Get.log(e.toString(), isError: true);
+      }
     }
     Get.toNamed(
       AppRoutes.player,
@@ -46,3 +54,4 @@ class HomePageController extends GetxController
     await player.dispose();
   }
 }
+
