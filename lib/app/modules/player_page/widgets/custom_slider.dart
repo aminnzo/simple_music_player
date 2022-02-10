@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simple_music_player/app/index_app.dart';
 
-class CustomSlider extends StatelessWidget {
+class CustomSlider extends GetWidget<PlayerPageController> {
   const CustomSlider({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +18,24 @@ class CustomSlider extends StatelessWidget {
               overlayColor: Colors.white24,
               overlayShape: const RoundSliderOverlayShape(overlayRadius: 16.0),
             ),
-            child: Slider(
+            child: Obx(() => Slider(
               min: 0,
-              max: 10,
-              value: 2,
+              max: controller.musicDuration.value.inSeconds.toDouble(),
+              value: controller.currentDuration.value.inSeconds.toDouble(),
               activeColor: Colors.white,
               inactiveColor: Colors.white38,
               thumbColor: Colors.white,
-              onChanged: (value) {},
-            ),
+              onChanged: (value) {
+                controller.currentDuration.value = Duration(seconds: value.toInt());
+              },
+              onChangeStart: (_) {
+                controller.pauseMusic();
+              },
+              onChangeEnd: (value) {
+                controller.currentDuration.value = Duration(seconds: value.toInt());
+                controller.seekDuration(value.toInt());
+              },
+            )),
           ),
         );
       }

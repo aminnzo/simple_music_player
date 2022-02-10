@@ -16,12 +16,8 @@ class HomePage extends GetView<HomePageController> {
               child: NestedScrollView(
                 headerSliverBuilder: (context, value) {
                   return [
-                    const SliverToBoxAdapter(
-                      child: HomeAppbar(),
-                    ),
-                    SliverToBoxAdapter(
-                      child: shuffleButton(() {}),
-                    ),
+                    const SliverToBoxAdapter(child: HomeAppbar()),
+                    SliverToBoxAdapter(child: shuffleButton(() {})),
                   ];
                 },
                 body: controller.obx(
@@ -30,9 +26,8 @@ class HomePage extends GetView<HomePageController> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: data!.length,
                     itemBuilder: (context, index) => MusicListItem(
-                      image: data[index].image,
-                      musicName: data[index].musicName,
-                      artistName: data[index].artistName,
+                      item: data[index],
+                      onTap: () => controller.handlePlayMusic(data[index]),
                     ),
                   ),
                   onLoading: Stack(
@@ -47,9 +42,7 @@ class HomePage extends GetView<HomePageController> {
                       ),
                     ],
                   ),
-                  onError: (error) => Center(
-                    child: TextBase(error.toString()),
-                  ),
+                  onError: (error) => Center(child: TextBase(error.toString())),
                 ),
               ),
             ),

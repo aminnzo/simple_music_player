@@ -21,31 +21,33 @@ class PlayerPage extends GetView<PlayerPageController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 68.w),
                     child: AspectRatio(
-                      aspectRatio: 1/1.2,
+                      aspectRatio: 1 / 1.2,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.r),
-                        child: const ImageAsset(
-                          image: 'image1.png',
+                        child: Obx(() => ImageAsset(
+                            image: controller.model.value.image,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 34.h),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      TextBase(
-                        'peaceful piano music',
-                        fontWeight: FontWeight.bold,
-                      ),
-                      SizedBox(height: 3.r),
-                      TextBase(
-                        'relaxing piano music',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 13.sp,
-                        color: Colors.white54,
-                      ),
-                    ],
+                  Obx(() => Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextBase(
+                          controller.model.value.musicName,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(height: 3.r),
+                        TextBase(
+                          controller.model.value.artistName,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13.sp,
+                          color: Colors.white54,
+                        ),
+                      ],
+                    ),
                   ),
                   const Spacer(flex: 2),
                   Padding(
@@ -53,22 +55,24 @@ class PlayerPage extends GetView<PlayerPageController> {
                     child: Column(
                       children: [
                         const CustomSlider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextBase(
-                              '01:06',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13.sp,
-                              color: Colors.white38,
-                            ),
-                            TextBase(
-                              '03:16',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13.sp,
-                              color: Colors.white38,
-                            ),
-                          ],
+                        Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextBase(
+                                timerText(controller.currentDuration.value),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13.sp,
+                                color: Colors.white38,
+                              ),
+                              TextBase(
+                                timerText(controller.musicDuration.value),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13.sp,
+                                color: Colors.white38,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -77,29 +81,44 @@ class PlayerPage extends GetView<PlayerPageController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      VectorAsset(
-                        icon: 'ic_backward',
-                        size: 32.r,
+                      GestureDetector(
+                        onTap: () => controller.prevMusic(),
+                        child: VectorAsset(
+                          icon: 'ic_backward',
+                          size: 32.r,
+                        ),
                       ),
                       SizedBox(width: 10.r),
-                      Container(
-                        width: 78.r,
-                        height: 78.r,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorsBase.gray,
-                        ),
-                        child: Center(
-                          child: VectorAsset(
-                            icon: 'ic_play',
-                            size: 32.r,
+                      GestureDetector(
+                        onTap: () => controller.isPlaying.value
+                            ? controller.pauseMusic()
+                            : controller.playMusic(),
+                        child: Container(
+                          width: 78.r,
+                          height: 78.r,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorsBase.gray,
+                          ),
+                          child: Center(
+                            child: Obx(
+                              () => VectorAsset(
+                                icon: controller.isPlaying.value
+                                    ? 'ic_pause'
+                                    : 'ic_play',
+                                size: 32.r,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 10.r),
-                      VectorAsset(
-                        icon: 'ic_forward',
-                        size: 32.r,
+                      GestureDetector(
+                        onTap: () => controller.nextMusic(),
+                        child: VectorAsset(
+                          icon: 'ic_forward',
+                          size: 32.r,
+                        ),
                       ),
                     ],
                   ),
@@ -112,4 +131,13 @@ class PlayerPage extends GetView<PlayerPageController> {
       ),
     );
   }
+
+  String timerText(Duration duration) {
+    final leftMin = duration.inMinutes;
+    final leftSecs = duration.inSeconds % 60;
+    return '${leftMin <= 10 ? '0' '$leftMin' : '$leftMin'}'
+        ':'
+        '${leftSecs >= 10 ? '$leftSecs' : '0' '$leftSecs'}';
+  }
+
 }

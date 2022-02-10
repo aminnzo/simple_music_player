@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:simple_music_player/app/index_app.dart';
 
 class MusicListItem extends StatelessWidget {
-  final String musicName;
-  final String artistName;
-  final String image;
+  final MusicItemModel item;
+  final VoidCallback onTap;
 
   const MusicListItem({
     Key? key,
-    required this.musicName,
-    required this.artistName,
-    required this.image,
+    required this.item,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => Get.toNamed(AppRoutes.player),
+      onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 9.r),
         child: Row(
@@ -29,7 +27,7 @@ class MusicListItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
                 child: ImageAsset(
-                  image: image,
+                  image: item.image,
                   width: 64.r,
                   height: 64.r,
                 ),
@@ -40,12 +38,12 @@ class MusicListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextBase(
-                  musicName,
+                  item.musicName,
                   fontWeight: FontWeight.bold,
                 ),
                 SizedBox(height: 3.r),
                 TextBase(
-                  artistName,
+                  item.artistName,
                   fontWeight: FontWeight.w500,
                   fontSize: 13.sp,
                   color: Colors.white54,
