@@ -7,7 +7,6 @@ class PlayerPageController extends GetxController {
   Rx<Duration> musicDuration = Rx<Duration>(const Duration(seconds: 1));
   Rx<Duration> currentDuration = Rx<Duration>(Duration.zero);
   Rx<MusicItemModel> model = MusicItemModel().obs;
-  RxBool isPlaying = RxBool(true);
 
   final homeController = Get.find<HomePageController>();
 
@@ -44,7 +43,6 @@ class PlayerPageController extends GetxController {
       if (musicDuration.value.inSeconds == duration.inSeconds) {
         seekDuration(0, shouldPlay: false);
         currentDuration.value = Duration.zero;
-        isPlaying.value = false;
         oldState = 0;
       }
     }, onError: (error) {
@@ -53,12 +51,10 @@ class PlayerPageController extends GetxController {
   }
 
   void playMusic() async {
-    isPlaying.value = true;
     await player.play();
   }
 
   void pauseMusic() async {
-    isPlaying.value = false;
     await player.pause();
   }
 

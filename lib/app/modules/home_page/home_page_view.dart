@@ -28,6 +28,12 @@ class HomePage extends GetView<HomePageController> {
                     itemBuilder: (context, index) => MusicListItem(
                       item: data[index],
                       onTap: () => controller.musicItemOnTap(data[index]),
+                      onTapPause: () {
+                        controller.changePlayerState(data[index]);
+                        controller.update();
+                      },
+                      isCurrent: controller.currentPlayingMusic.value.id == data[index].id,
+                      isPlaying: controller.isPlaying.value,
                     ),
                   ),
                   onLoading: Stack(

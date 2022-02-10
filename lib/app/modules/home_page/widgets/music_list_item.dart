@@ -4,11 +4,17 @@ import 'package:simple_music_player/app/index_app.dart';
 class MusicListItem extends StatelessWidget {
   final MusicItemModel item;
   final VoidCallback onTap;
+  final VoidCallback onTapPause;
+  final bool isCurrent;
+  final bool isPlaying;
 
   const MusicListItem({
     Key? key,
     required this.item,
     required this.onTap,
+    required this.onTapPause,
+    required this.isCurrent,
+    required this.isPlaying,
   }) : super(key: key);
 
   @override
@@ -26,10 +32,30 @@ class MusicListItem extends StatelessWidget {
               height: 64.r,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.r),
-                child: ImageAsset(
-                  image: item.image,
-                  width: 64.r,
-                  height: 64.r,
+                child: Stack(
+                  children: [
+                    ImageAsset(
+                      image: item.image,
+                      width: 64.r,
+                      height: 64.r,
+                    ),
+                    Visibility(
+                      visible: isCurrent,
+                      child: GestureDetector(
+                        onTap: onTapPause,
+                        child: Container(
+                          color: Colors.black38,
+                          child: Center(
+                            child: VectorAsset(
+                              icon: isPlaying ? 'ic_pause' : 'ic_play',
+                              size: 26.r,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

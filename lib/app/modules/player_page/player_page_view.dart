@@ -90,7 +90,7 @@ class PlayerPage extends GetView<PlayerPageController> {
                       ),
                       SizedBox(width: 10.r),
                       GestureDetector(
-                        onTap: () => controller.isPlaying.value
+                        onTap: () => controller.homeController.isPlaying.value
                             ? controller.pauseMusic()
                             : controller.playMusic(),
                         child: Container(
@@ -103,7 +103,7 @@ class PlayerPage extends GetView<PlayerPageController> {
                           child: Center(
                             child: Obx(
                               () => VectorAsset(
-                                icon: controller.isPlaying.value
+                                icon: controller.homeController.isPlaying.value
                                     ? 'ic_pause'
                                     : 'ic_play',
                                 size: 32.r,

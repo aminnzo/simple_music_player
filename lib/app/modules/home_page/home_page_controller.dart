@@ -10,10 +10,12 @@ class HomePageController extends GetxController
   final player = AudioPlayer();
   Rx<MusicItemModel> currentPlayingMusic = MusicItemModel().obs;
   List<MusicItemModel> musics = [];
+  RxBool isPlaying = RxBool(true);
 
   @override
   void onInit() {
     fetchAllMusics();
+    _initPlayerStateStream();
     super.onInit();
   }
 
@@ -47,6 +49,21 @@ class HomePageController extends GetxController
         'player': player,
       }),
     );
+  }
+
+  void _initPlayerStateStream() {
+    player.playerStateStream.listen((event) {
+      isPlaying.value = event.playing;
+      update();
+    });
+  }
+
+  void changePlayerState(MusicItemModel model) async {
+    if(player.playing) {
+      await player.pause();
+    } else {
+      await player.play();
+    }
   }
 
   @override
