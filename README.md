@@ -1,7 +1,6 @@
 # Simple Flutter Music Player
 
 An Open-Source Simple asset music player built with flutter. It uses the GetX plugin for state managements.
-Special thanks to [Rabia Israr](https://www.figma.com/@rabiaisrar) for this amazing free [UI](https://www.figma.com/community/file/1069634167713119785).
 
 [![made-with-flutter](https://img.shields.io/badge/Made%20with-Flutter-1f425f.svg)](https://flutter.dev/)
 [![get-package](https://img.shields.io/badge/Sate%20Management-GetX-purple.svg)](https://pub.dev/packages/get/)
@@ -41,3 +40,6 @@ flutter run
 ## Contribute
 
 All Contributions are welcome.
+
+### UI Design
+Special thanks to [Rabia Israr](https://www.figma.com/@rabiaisrar) for this amazing free [UI](https://www.figma.com/community/file/1069634167713119785).
