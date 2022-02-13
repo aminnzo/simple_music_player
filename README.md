@@ -4,7 +4,7 @@ An Open-Source Simple asset music player built with flutter. It uses the GetX pl
 
 [![made-with-flutter](https://img.shields.io/badge/Made%20with-Flutter-1f425f.svg)](https://flutter.dev/)
 [![get-package](https://img.shields.io/badge/Sate%20Management-GetX-purple.svg)](https://pub.dev/packages/get/)
-[![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://pub.dev/packages/effective_dart)
+[![style](https://img.shields.io/badge/Style-Flutter%20Lints-blue.svg)](https://pub.dev/packages/flutter_lints)
 
 <img src="preview-image.png"/>
 
@@ -41,5 +41,5 @@ flutter run
 
 All Contributions are welcome.
 
-### UI Design
+## UI Design
 Special thanks to [Rabia Israr](https://www.figma.com/@rabiaisrar) for this amazing free [UI](https://www.figma.com/community/file/1069634167713119785).
