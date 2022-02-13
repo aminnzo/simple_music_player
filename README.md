@@ -1,5 +1,3 @@
-<img src="preview-image.png"/>
-
 # Simple Flutter Music Player
 
 An Open-Source Simple asset music player built with flutter. It uses the GetX plugin for state managements.
@@ -8,11 +6,13 @@ An Open-Source Simple asset music player built with flutter. It uses the GetX pl
 [![get-package](https://img.shields.io/badge/Sate%20Management-GetX-purple.svg)](https://pub.dev/packages/get/)
 [![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://pub.dev/packages/effective_dart)
 
+<img src="preview-image.png"/>
+
 * Note - This project has an audio player plugin which can be used in any of your projects. Check the below link.
 
-### just_audio Audio Player Plugin
+### just_audio Player [Plugin](https://github.com/ryanheise/just_audio)
 
-[Plugin](https://github.com/ryanheise/just_audio)
+Special thanks to [Rabia Israr](https://www.figma.com/@rabiaisrar) for this amazing free [UI](https://www.figma.com/community/file/1069634167713119785).
 
 ## License
 ```
@@ -42,6 +42,3 @@ flutter run
 ## Contribute
 
 All Contributions are welcome.
-
-Special thanks to [Rabia Israr](https://www.figma.com/@rabiaisrar) for this amazing free [UI](https://www.figma.com/community/file/1069634167713119785).
-
