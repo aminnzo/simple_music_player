@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder: () => GetMaterialApp(
+      builder: (context, widget) => GetMaterialApp(
         title: 'Music Player',
         theme: AppTheme.lightTheme(),
         darkTheme: AppTheme.darkTheme(),
@@ -17,7 +17,7 @@ class App extends StatelessWidget {
         getPages: AppPages.routes,
         debugShowCheckedModeBanner: false,
         builder: (context, widget) {
-          ScreenUtil.setContext(context);
+          // ScreenUtil.setContext(context);
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
             child: widget!,
