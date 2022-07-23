@@ -1,7 +1,8 @@
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.6.20'
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 
@@ -14,6 +15,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 }
@@ -21,6 +23,8 @@ allprojects {
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
     project.evaluationDependsOn(':app')
 }
 
