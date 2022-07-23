@@ -7,82 +7,17 @@ class MusicProvider extends GetConnect {
     super.onInit();
   }
 
-  static List<MusicItemModel> _fakeData() {
-    return [
-      MusicItemModel(
-        id: 1,
-        musicName: 'Miss You',
-        artistName: 'W.A.S.P.',
-        image: 'image1.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 2,
-        musicName: 'Day N night',
-        artistName: 'Kid Cudi',
-        image: 'image2.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 3,
-        musicName: 'Remember Me',
-        artistName: 'Fjaak',
-        image: 'image3.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 4,
-        musicName: 'Acid Rain',
-        artistName: 'Lorn',
-        image: 'image4.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 5,
-        musicName: 'Play Out',
-        artistName: 'Zola Blood',
-        image: 'image5.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 6,
-        musicName: 'I Found You',
-        artistName: 'Kyle',
-        image: 'image6.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 7,
-        musicName: 'Crystal Castles, Health',
-        artistName: 'Crimewave',
-        image: 'image7.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 8,
-        musicName: 'No Tellin',
-        artistName: 'Drake',
-        image: 'image8.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 9,
-        musicName: 'Baptized In Fire',
-        artistName: 'Kid Cudi(feat. Travis Scott)',
-        image: 'image9.png',
-        mp3: 'music1.mp3',
-      ),
-      MusicItemModel(
-        id: 10,
-        musicName: 'King Lil G',
-        artistName: 'Ignorance',
-        image: 'image10.png',
-        mp3: 'music1.mp3',
-      ),
-    ];
+  Future<List<MusicItemModel>> getMusics() {
+    return Future.delayed(const Duration(milliseconds: 1500), _generateFakeData);
   }
 
-  Future<List<MusicItemModel>> getMusics() {
-    return Future.delayed(const Duration(milliseconds: 1500), _fakeData);
-  }
+  static List<MusicItemModel> _generateFakeData() => List.generate(
+      10,
+      (index) => MusicItemModel(
+            id: 1,
+            musicName: 'Music ${index + 1}',
+            artistName: 'Artist ${index + 1}',
+            image: 'image${index + 1}.png',
+            mp3: 'music1.mp3',
+          ));
 }
