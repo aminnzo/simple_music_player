@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_music_player/app/index_app.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:simple_music_player/app/widgets/circle_appbar_icon.dart';
+import 'package:simple_music_player/app/widgets/text_base.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppbar({Key? key}) : super(key: key);

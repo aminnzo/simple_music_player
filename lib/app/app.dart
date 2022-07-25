@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:simple_music_player/app/index_app.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'routes/app_pages.dart';
+import 'ui/theme/index.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

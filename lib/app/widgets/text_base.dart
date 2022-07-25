@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_music_player/app/index_app.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:simple_music_player/app/ui/theme/colors.dart';
+import 'package:simple_music_player/app/ui/theme/fonts.dart';
 
 // ignore: non_constant_identifier_names
 Widget TextBase(

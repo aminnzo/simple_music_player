@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:simple_music_player/app/index_app.dart';
-
-export 'fonts.dart';
+import 'package:simple_music_player/app/ui/theme/colors.dart';
+import 'package:simple_music_player/app/ui/theme/fonts.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme() => _theme(false);

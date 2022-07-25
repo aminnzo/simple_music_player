@@ -1,4 +1,6 @@
-import 'package:simple_music_player/app/index_app.dart';
+import 'package:get/get.dart';
+import 'package:simple_music_player/app/ui/pages/home_page/home_page_view.dart';
+import 'package:simple_music_player/app/ui/pages/player_page/player_page_view.dart';
 
 part 'app_routes.dart';
 
@@ -12,12 +14,10 @@ class AppPages {
     GetPage(
       name: _Paths.homePage,
       page: () => const HomePage(),
-      binding: HomePageBinding(),
     ),
     GetPage(
       name: _Paths.playerPage,
       page: () => const PlayerPage(),
-      binding: PlayerPageBinding(),
     ),
   ];
 }

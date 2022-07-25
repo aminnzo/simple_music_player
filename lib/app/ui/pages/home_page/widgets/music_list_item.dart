@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:simple_music_player/app/index_app.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:simple_music_player/app/widgets/text_base.dart';
+import 'package:simple_music_player/app/widgets/vector_asset.dart';
 
 class MusicListItem extends StatelessWidget {
-  final MusicItemModel item;
+  final String image;
+  final String musicName;
+  final String artistName;
   final VoidCallback onTap;
   final VoidCallback onTapPause;
   final bool isCurrent;
@@ -10,7 +14,9 @@ class MusicListItem extends StatelessWidget {
 
   const MusicListItem({
     Key? key,
-    required this.item,
+    required this.image,
+    required this.musicName,
+    required this.artistName,
     required this.onTap,
     required this.onTapPause,
     required this.isCurrent,
@@ -34,11 +40,11 @@ class MusicListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
                 child: Stack(
                   children: [
-                    ImageAsset(
-                      image: item.image,
-                      width: 64.r,
-                      height: 64.r,
-                    ),
+                    // ImageAsset(
+                    //   image: image,
+                    //   width: 64.r,
+                    //   height: 64.r,
+                    // ),
                     Visibility(
                       visible: isCurrent,
                       child: GestureDetector(
@@ -64,12 +70,12 @@ class MusicListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextBase(
-                  item.musicName,
+                  musicName,
                   fontWeight: FontWeight.bold,
                 ),
                 SizedBox(height: 3.r),
                 TextBase(
-                  item.artistName,
+                  artistName,
                   fontWeight: FontWeight.w500,
                   fontSize: 13.sp,
                   color: Colors.white54,
