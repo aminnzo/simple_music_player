@@ -15,7 +15,7 @@ class GetXAudioHandler extends GetxService {
       builder: () => GetXBaseAudioHandler(),
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'app.dartdev.musicplayer.audio',
-        androidNotificationChannelName: 'Echo Audio Service',
+        androidNotificationChannelName: 'Simple Audio Player Service',
         androidNotificationOngoing: true,
         androidStopForegroundOnPause: true,
       ),
