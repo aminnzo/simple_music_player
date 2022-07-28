@@ -33,25 +33,29 @@ class MusicListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 64.r,
-              height: 64.r,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.r),
-                child: Stack(
-                  children: [
-                    Image.network(
-                      image,
-                      width: 64.r,
-                      height: 64.r,
-                      fit: BoxFit.cover,
-                    ),
-                    Visibility(
-                      visible: isCurrent,
-                      child: GestureDetector(
-                        onTap: onTapPause,
+            GestureDetector(
+              onTap: onTapPause,
+              child: SizedBox(
+                width: 64.r,
+                height: 64.r,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.r),
+                  child: Stack(
+                    children: [
+                      Image.network(
+                        image,
+                        width: 64.r,
+                        height: 64.r,
+                        fit: BoxFit.cover,
+                      ),
+                      Visibility(
+                        visible: isCurrent,
                         child: Container(
-                          color: Colors.black38,
+                          decoration: BoxDecoration(
+                            color: Colors.black45,
+                            border: Border.all(color: Colors.white24, width: 4.r),
+                            borderRadius: BorderRadius.circular(15.r),
+                          ),
                           child: Center(
                             child: VectorAsset(
                               icon: isPlaying ? 'ic_pause' : 'ic_play',
@@ -61,8 +65,8 @@ class MusicListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

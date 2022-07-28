@@ -119,7 +119,7 @@ class RepeatButton extends GetView<GetXPlayerController> {
       Icon icon;
       switch (controller.repeatButtonNotifier.value) {
         case RepeatState.off:
-          icon = const Icon(Icons.repeat, color: Colors.grey);
+          icon = const Icon(Icons.repeat, color: Colors.white54);
           break;
         case RepeatState.repeatSong:
           icon = const Icon(Icons.repeat_one);
@@ -148,6 +148,7 @@ class PreviousSongButton extends GetView<GetXPlayerController> {
         child: VectorAsset(
           icon: 'ic_backward',
           size: 32.r,
+          color: (controller.isFirstSongNotifier.value) ? Colors.white54 : Colors.white,
         ),
       ),
     );
@@ -167,9 +168,12 @@ class PlayButton extends GetView<GetXPlayerController> {
             height: 78.r,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorsBase.gray,
+              color: Colors.white24,
             ),
-            child: const Center(child: CircularProgressIndicator()),
+            child: const Center(child: CircularProgressIndicator(
+              color: Colors.white54,
+              strokeWidth: 2,
+            )),
           );
         case ButtonState.paused:
           return Container(
@@ -177,7 +181,7 @@ class PlayButton extends GetView<GetXPlayerController> {
             height: 78.r,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorsBase.gray,
+              color: Colors.white24,
             ),
             child: Center(
               child: IconButton(
@@ -193,7 +197,7 @@ class PlayButton extends GetView<GetXPlayerController> {
             height: 78.r,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: ColorsBase.gray,
+              color: Colors.white24,
             ),
             child: Center(
               child: IconButton(
@@ -219,6 +223,7 @@ class NextSongButton extends GetView<GetXPlayerController> {
         child: VectorAsset(
           icon: 'ic_forward',
           size: 32.r,
+          color: (controller.isLastSongNotifier.value) ? Colors.white54 : Colors.white,
         ),
       ),
     );
@@ -234,7 +239,7 @@ class ShuffleButton extends GetView<GetXPlayerController> {
       () => IconButton(
         icon: (controller.isShuffleModeEnabledNotifier.value)
             ? const Icon(Icons.shuffle)
-            : const Icon(Icons.shuffle, color: Colors.grey),
+            : const Icon(Icons.shuffle, color: Colors.white54),
         onPressed: controller.shuffle,
       ),
     );

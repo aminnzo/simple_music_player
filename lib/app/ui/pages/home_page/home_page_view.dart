@@ -34,14 +34,28 @@ class HomePage extends GetView<GetXPlayerController> {
                     padding: EdgeInsets.only(bottom: 60.r),
                     physics: const BouncingScrollPhysics(),
                     itemCount: controller.playlistNotifier.value.length,
-                    itemBuilder: (context, index) => MusicListItem(
-                      image: controller.playlistNotifier.value[index].artUri.toString(),
-                      musicName: controller.playlistNotifier.value[index].title,
-                      artistName: 'artist name',
-                      onTap: () => Get.toNamed(AppRoutes.player),
-                      onTapPause: () {},
-                      isCurrent: false,
-                      isPlaying: false,
+                    itemBuilder: (context, index) => Obx(
+                      () => MusicListItem(
+                        image: controller.playlistNotifier.value[index].artUri
+                            .toString(),
+                        musicName:
+                            controller.playlistNotifier.value[index].title,
+                        artistName: 'artist name',
+                        onTap: () => Get.toNamed(AppRoutes.player),
+                        onTapPause:
+                            controller.playlistNotifier.value[index].title ==
+                                    controller.currentSongTitleNotifier.value
+                                ? controller.playButtonNotifier.value ==
+                                        ButtonState.playing
+                                    ? controller.pause
+                                    : controller.play
+                                : () {},
+                        isCurrent:
+                            controller.playlistNotifier.value[index].title ==
+                                controller.currentSongTitleNotifier.value,
+                        isPlaying: controller.playButtonNotifier.value ==
+                            ButtonState.playing,
+                      ),
                     ),
                   ),
                 ),
