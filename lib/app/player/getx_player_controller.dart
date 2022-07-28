@@ -19,7 +19,8 @@ class GetXPlayerController extends GetxController {
 
   // Listeners: Updates going to the UI
   final currentSongTitleNotifier = ''.obs;
-  final playlistNotifier = <String>[].obs;
+  final currentSongArtNotifier = ''.obs;
+  final playlistNotifier = <MediaItem>[].obs;
   final progressNotifier = ProgressModel.zero().obs;
   final repeatButtonNotifier = RepeatState.off.obs;
   final playButtonNotifier = ButtonState.paused.obs;
@@ -37,6 +38,7 @@ class GetXPlayerController extends GetxController {
               id: song['id'] ?? '',
               album: song['album'] ?? '',
               title: song['title'] ?? '',
+              artUri: Uri.parse(song['artUri'] ?? ''),
               extras: {'url': song['url']},
             ))
         .toList();
@@ -48,9 +50,9 @@ class GetXPlayerController extends GetxController {
       if (playlist.isEmpty) {
         playlistNotifier.value = [];
         currentSongTitleNotifier.value = '';
+        currentSongArtNotifier.value = '';
       } else {
-        final newList = playlist.map((item) => item.title).toList();
-        playlistNotifier.value = newList;
+        playlistNotifier.value = playlist;
       }
       _updateSkipButtons();
     });
@@ -110,6 +112,7 @@ class GetXPlayerController extends GetxController {
   void _listenToChangesInSong() {
     _audioHandler.mediaItem.listen((mediaItem) {
       currentSongTitleNotifier.value = mediaItem?.title ?? '';
+      currentSongArtNotifier.value = mediaItem?.artUri.toString() ?? '';
       _updateSkipButtons();
     });
   }

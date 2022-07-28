@@ -40,11 +40,12 @@ class MusicListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
                 child: Stack(
                   children: [
-                    // ImageAsset(
-                    //   image: image,
-                    //   width: 64.r,
-                    //   height: 64.r,
-                    // ),
+                    Image.network(
+                      image,
+                      width: 64.r,
+                      height: 64.r,
+                      fit: BoxFit.cover,
+                    ),
                     Visibility(
                       visible: isCurrent,
                       child: GestureDetector(

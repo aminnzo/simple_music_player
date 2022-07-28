@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:simple_music_player/app/player/audio_video_progress_bar.dart';
+import 'package:simple_music_player/app/widgets/audio_video_progress_bar.dart';
 import 'package:simple_music_player/app/player/getx_player_controller.dart';
 
 class CustomSlider extends GetView<GetXPlayerController> {
@@ -9,71 +10,26 @@ class CustomSlider extends GetView<GetXPlayerController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => ProgressBar(
+      () => ProgressBar(
         progress: controller.progressNotifier.value.current,
         buffered: controller.progressNotifier.value.buffered,
         total: controller.progressNotifier.value.total,
         onSeek: controller.seek,
+        barHeight: 4,
+        barCapShape: BarCapShape.round,
+        baseBarColor: Colors.white38,
+        bufferedBarColor: Colors.white12,
+        progressBarColor: Colors.white,
+        thumbColor: Colors.white,
+        timeLabelTextStyle: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 13.sp,
+          color: Colors.white38,
+        ),
+        timeLabelPadding: 10.0,
+        thumbRadius: 8,
+        thumbGlowRadius: 16,
       ),
     );
   }
 }
-
-// class CustomSlider extends GetWidget<PlayerPageController> {
-//   const CustomSlider({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Builder(
-//       builder: (context) {
-//         return SizedBox(
-//           height: 24.r,
-//           child: SliderTheme(
-//             data: SliderThemeData(
-//               trackShape: CustomTrackShape(),
-//               trackHeight: 2,
-//               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
-//               overlayColor: Colors.white24,
-//               overlayShape: const RoundSliderOverlayShape(overlayRadius: 16.0),
-//             ),
-//             child: Obx(() => Slider(
-//               min: 0,
-//               max: controller.musicDuration.value.inSeconds.toDouble(),
-//               value: controller.currentDuration.value.inSeconds.toDouble(),
-//               activeColor: Colors.white,
-//               inactiveColor: Colors.white38,
-//               thumbColor: Colors.white,
-//               onChanged: (value) {
-//                 controller.currentDuration.value = Duration(seconds: value.toInt());
-//               },
-//               onChangeStart: (_) {
-//                 controller.pauseMusic();
-//               },
-//               onChangeEnd: (value) {
-//                 controller.currentDuration.value = Duration(seconds: value.toInt());
-//                 controller.seekDuration(value.toInt());
-//               },
-//             )),
-//           ),
-//         );
-//       }
-//     );
-//   }
-// }
-//
-// class CustomTrackShape extends RoundedRectSliderTrackShape {
-//   @override
-//   Rect getPreferredRect({
-//     required RenderBox parentBox,
-//     Offset offset = Offset.zero,
-//     required SliderThemeData sliderTheme,
-//     bool isEnabled = false,
-//     bool isDiscrete = false,
-//   }) {
-//     final double trackHeight = sliderTheme.trackHeight ?? 1;
-//     final double trackLeft = offset.dx;
-//     final double trackTop = offset.dy;
-//     final double trackWidth = parentBox.size.width;
-//     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
-//   }
-// }

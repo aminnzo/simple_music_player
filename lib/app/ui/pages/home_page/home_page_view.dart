@@ -35,8 +35,8 @@ class HomePage extends GetView<GetXPlayerController> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: controller.playlistNotifier.value.length,
                     itemBuilder: (context, index) => MusicListItem(
-                      image: '',
-                      musicName: controller.playlistNotifier.value[index],
+                      image: controller.playlistNotifier.value[index].artUri.toString(),
+                      musicName: controller.playlistNotifier.value[index].title,
                       artistName: 'artist name',
                       onTap: () => Get.toNamed(AppRoutes.player),
                       onTapPause: () {},
@@ -88,7 +88,7 @@ class Playlist extends GetView<GetXPlayerController> {
           itemCount: controller.playlistNotifier.value.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(controller.playlistNotifier.value[index]),
+              title: Text(controller.playlistNotifier.value[index].title),
             );
           },
         ),

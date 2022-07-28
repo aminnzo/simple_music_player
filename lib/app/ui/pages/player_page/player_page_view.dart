@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simple_music_player/app/player/getx_player_controller.dart';
+import 'package:simple_music_player/app/ui/pages/player_page/widgets/custom_slider.dart';
 import 'package:simple_music_player/app/ui/pages/player_page/widgets/player_appbar.dart';
 import 'package:simple_music_player/app/ui/theme/index.dart';
 import 'package:simple_music_player/app/widgets/background/custom_background.dart';
@@ -24,51 +25,15 @@ class PlayerPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const PlayerAppbar(),
-                  // SizedBox(height: 20.h),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 68.w),
-                  //   child: AspectRatio(
-                  //     aspectRatio: 1 / 1.2,
-                  //     child: ClipRRect(
-                  //       borderRadius: BorderRadius.circular(20.r),
-                  //       child: Obx(
-                  //         () => ImageAsset(
-                  //           image: controller.model.value.image,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  SizedBox(height: 20.h),
+                  const ArtImage(),
                   SizedBox(height: 34.h),
                   const ArtistAndSongName(),
-                  // const Spacer(flex: 2),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 68.w),
-                  //   child: Column(
-                  //     children: [
-                  //       const CustomSlider(),
-                  //       Obx(
-                  //         () => Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             TextBase(
-                  //               timerText(controller.currentDuration.value),
-                  //               fontWeight: FontWeight.w500,
-                  //               fontSize: 13.sp,
-                  //               color: Colors.white38,
-                  //             ),
-                  //             TextBase(
-                  //               timerText(controller.musicDuration.value),
-                  //               fontWeight: FontWeight.w500,
-                  //               fontSize: 13.sp,
-                  //               color: Colors.white38,
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  const Spacer(flex: 2),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 68.w),
+                    child: const CustomSlider(),
+                  ),
                   const Spacer(flex: 1),
                   // player controller buttons
                   Row(
@@ -94,13 +59,28 @@ class PlayerPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  String timerText(Duration duration) {
-    final leftMin = duration.inMinutes;
-    final leftSecs = duration.inSeconds % 60;
-    return '${leftMin <= 10 ? '0' '$leftMin' : '$leftMin'}'
-        ':'
-        '${leftSecs >= 10 ? '$leftSecs' : '0' '$leftSecs'}';
+class ArtImage extends GetView<GetXPlayerController> {
+  const ArtImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 68.w),
+      child: AspectRatio(
+        aspectRatio: 1 / 1.2,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.r),
+          child: Obx(
+            () => Image.network(
+              controller.currentSongArtNotifier.value,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
